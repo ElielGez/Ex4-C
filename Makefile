@@ -1,11 +1,11 @@
 CC=gcc
 OBJECTS_MAIN=node.o utils.o trie.o
 FLAGS= -Wall -g -fPIC
-PROGRAMS=trie
+PROGRAMS=frequency
 
 all: $(PROGRAMS)
-trie: $(OBJECTS_MAIN)
-	$(CC) $(FLAGS) -o trie $(OBJECTS_MAIN) -lm
+frequency: $(OBJECTS_MAIN)
+	$(CC) $(FLAGS) -o frequency $(OBJECTS_MAIN) -lm
 utils.o: utils.c utils.h
 	$(CC) $(FLAGS) -c utils.c
 node.o: node.c node.h utils.h
@@ -16,4 +16,4 @@ trie.o: trie.c trie.h node.h utils.h
 .PHONY: clean all
 
 clean:
-	rm -f *.o *.so $(PROGRAMS)
+	rm -f *.o $(PROGRAMS)

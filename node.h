@@ -12,3 +12,4 @@ typedef struct node
 
 void addChildren(node **head, char c);
 node *initnode();
+void freeNode(node *node);

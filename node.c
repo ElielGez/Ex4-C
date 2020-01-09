@@ -1,5 +1,9 @@
 #include "node.h"
 
+/**
+ * addChildren function , add node as children with char c if doesn't exist in array.
+ * otherwise head equals to the next children with the char c
+**/
 void addChildren(node **head, char c)
 {
     if (head == NULL || *head == NULL)
@@ -9,17 +13,18 @@ void addChildren(node **head, char c)
     {
         tmp = initnode();
         tmp->letter = c;
-        tmp->count++;
         (*head)->children[c - 'a'] = tmp;
     }
     else
     {
-        (*head)->children[c - 'a']->count++;
         tmp = (*head)->children[c - 'a'];
     }
     *head = tmp;
 }
 
+/**
+ * function to initialize node with null
+**/
 node *initnode()
 {
     node *tmp = (node *)malloc(sizeof(node));
@@ -31,4 +36,22 @@ node *initnode()
         tmp->children[i] = NULL;
     }
     return tmp;
+}
+
+/**
+ * recursive function to free allocation of nodes
+**/
+void freeNode(node *node)
+{
+    for (int i = NUM_LETTERS - 1; i >= 0; i--)
+    {
+        if (node->children[i] != NULL)
+        {
+            freeNode(node->children[i]);
+        }
+    }
+    if (node != NULL)
+    {
+        free(node);
+    }
 }
